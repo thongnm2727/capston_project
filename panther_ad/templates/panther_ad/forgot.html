@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Panther_Ad</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/styles/css/themes/lite-purple.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/myStyle.css' %}">
+</head>
+
+<body class="text-left">
+<div class="auth-layout-wrap" style="background-image: url({% static 'assets/images/photo-wide-4.jpg' %})">
+    <div class="auth-content">
+        <div class="card o-hidden">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="p-4">
+                        <div class="auth-logo text-center mb-4">
+                            <img src="{% static 'assets/images/panther_ad.png' %}" alt="">
+                        </div>
+                        <h1 class="mb-3 text-18">Forgot Password</h1>
+                        <form action="{% url 'panther_ad:forgot' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input id="email" class="form-control form-control-rounded" type="email">
+                            </div>
+                            <button class="btn btn-primary btn-block btn-rounded mt-3" type="submit">
+                                Reset Password
+                            </button>
+
+                        </form>
+                        <div class="mt-3 text-center">
+                            <a class="text-muted" href="{% url 'panther_ad:signin' %}"><u>Sign in</u></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center "
+                     style="background-size: cover;background-image: url({% static 'assets//images/photo-long-3.jpg' %})">
+                    <div class="pr-3 auth-right">
+                        <a class="btn btn-outline-primary btn-outline-email btn-block btn-icon-text btn-rounded" href="{% url 'panther_ad:signup' %}">
+                            <i class="i-Mail-with-At-Sign"></i> Sign up with Email
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/script.min.js' %}"></script>
+</body>
+
+</html>

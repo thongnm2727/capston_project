@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Campaign Detail</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/styles/css/themes/lite-purple.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"> -->
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/myStyle.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/classic.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/classic.date.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/myCss.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/sweetalert2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/datatables.min.css' %}">
+</head>
+
+<body class="text-left">
+<!-- Pre Loader Strat  -->
+<div class='loadscreen' id="preloader">
+    <div class="loader spinner-bubble spinner-bubble-primary">
+    </div>
+</div>
+<!-- Pre Loader end  -->
+
+
+<div class="app-admin-wrap layout-sidebar-large">
+    <div class="main-header">
+        <div class="logo">
+            <a href="{% url 'panther_ad:index' %}">
+                <img src="{% static 'assets/images/panther_ad.png' %}" alt="">
+            </a>
+        </div>
+
+        <div class="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div style="margin: auto;">
+
+        </div>
+
+        {# Create Ads Btn #} {# Full Screen toggle #}
+        <div class="header-part-right">
+            <!-- Full screen toggle -->
+            <div style="margin-right: 50px;white-space: nowrap;">
+                <a href="#">
+                    <button type="button" class="buttonsz" data-toggle="modal" data-target="#topupbalance"><span><b
+                            class="text-20 pb-10">&nbsp;&nbsp;&nbsp;&nbsp;+
+                                    Top up balance</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </a>
+
+            </div>
+            <!-- Top Up Balance Modal content -->
+
+            <div style="margin-right: 50px;white-space: nowrap;">
+                <a href="{% url 'panther_ad:create_ad' %}">
+                    <button type="button" class="buttonsz"><span><b class="text-20 pb-10">&nbsp;&nbsp;&nbsp;&nbsp;+
+                                    Create
+                                    Ad</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </a>
+            </div>
+            <div style="margin-right: 100px;white-space: nowrap;">
+                <a href="{% url 'panther_ad:create_campaign' %}">
+                    <button type="button" class="buttonsz"><span><b class="text-20 pb-10">&nbsp;&nbsp;&nbsp;&nbsp;+
+                                    Create
+                                    Campaign</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </a>
+
+            </div>
+            <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
+            <!-- Grid menu Dropdown -->
+
+
+            <!-- User avatar dropdown -->
+            <div class="dropdown">
+                <div class="user col align-self-end">
+                    <img src="{% static 'assets/images/faces/1.jpg' %}" id="userDropdown" alt="" data-toggle="dropdown"
+                         aria-haspopup="true"
+                         aria-expanded="false">
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div class="dropdown-header">
+                            <h3><i class="i-Lock-User mr-1"></i> {{ user.username }}</h3>
+                        </div>
+                        <a class="dropdown-item" href="{% url 'panther_ad:user_profile' %}">User Profile</a>
+                        <a class="dropdown-item" href="{% url 'panther_ad:account_activity' %}">Account activity</a>
+                        <a class="dropdown-item" href="{% url 'panther_ad:signout' %}">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- header top menu end -->
+    <div class="modal fade" id="topupbalance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Top up balance</h2>
+                    <br/>
+
+                </div>
+                <form class="needs-validation topupbalance_form" action="{% url 'panther_ad:top_up_balance' %}"
+                      method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Full Name:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-Male-21 text-18"></i>
+                                        </span>
+                                </div>
+                                <input name="full_name" type="text" class="form-control" required/>
+                                <p id="err_contain_number" style="display: none; color: red;">Name cannot contains
+                                    number!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <p style=" color: green; visibility: hidden;" class="modal-title" id="succeeded_update"></p> -->
+                            <label>Bank:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-University1 text-18"></i>
+                                        </span>
+                                </div>
+                                <select name="bank" class="form-control">
+                                    <option value="MB"> MB Bank</option>
+                                    <option value="VCB"> Vietcombank</option>
+                                    <option value="TPB"> TPBank</option>
+                                    <option value="VTB"> VietinBank</option>
+                                    <option value="AGB"> Agribank</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-Credit-Card text-18"></i>
+                                        </span>
+                                </div>
+                                <input type="text" class="form-control" id="card_number" required/>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Expire Date:</label>
+
+                            <div class="form-inline">
+                                <select class="form-control" style="width:45%">
+                                    <option>01 - January</option>
+                                    <option>02 - February</option>
+                                    <option>03 - March</option>
+                                    <option>04 - April</option>
+                                    <option>05 - May</option>
+                                    <option>06 - June</option>
+                                    <option>07 - July</option>
+                                    <option>08 - August</option>
+                                    <option>09 - September</option>
+                                    <option>10 - October</option>
+                                    <option>11 - November</option>
+                                    <option>12 - December</option>
+                                </select>
+                                <span class="text-center" style="width:10%">
+                                        /
+                                    </span>
+                                <select class="form-control" style="width:45%">
+                                    <option>2018</option>
+                                    <option>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-Dollar text-18"></i>
+                                        </span>
+                                </div>
+                                <input type="text" class="form-control" name="amount" required/>
+                            </div>
+
+                        </div>
+                        <p id="tu_succeeded" style="display: none; color: green;">Top up succeeded! </p>
+                        <p id="tu_failed" style="display: none; color: red;">Top up failed! Something went wrong!
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close_modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                        </button>
+                        <button id="confirm_modal" type="submit" class="btn btn-primary ml-2">Confirm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="side-content-wrap">
+        <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+            <ul class="navigation-left">
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:index' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:campaigns' %}">
+                        <i class="nav-icon i-Library"></i>
+                        <span class="nav-text">Campaign</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:ads' %}">
+                        <i class="nav-icon i-Belt-3"></i>
+                        <span class="nav-text">Ads</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:account_activity' %}">
+                        <i class="nav-icon i-Dollar-Sign"></i>
+                        <span class="nav-text">Account Activity</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!--=============== Left side End ================-->
+
+    <!-- ============ Body content start ============= -->
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+
+        <div class="breadcrumb">
+            <h1>Campaign</h1>
+            <ul>
+                <li>
+                    <a href=""></a>
+                </li>
+                <li>Campaign</li>
+            </ul>
+        </div>
+        <div class="separator-breadcrumb border-top"></div>
+
+        {# Alert #} {% if success_message %}
+        <div class="alert success">
+            <span class="closebtn">&times;</span>
+            <strong>{{ success_message }}</strong>
+        </div>
+    {% elif error_message %}
+        <div class="alert warning">
+            <span class="closebtn">&times;</span>
+            <strong>{{ error_message }}</strong>
+        </div>
+    {% endif %}
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <b class="text-30">Campaign Informations</b>
+                        <form class="needs-validation" action="{% url 'panther_ad:campaign_detail' campaign.id %}"
+                              method="post" novalidate>
+                            <div class="form-row">
+                                {% csrf_token %}
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-18" for="validationCustom01" style="width: auto">Campaign
+                                        Name</label>
+                                    <input type="text" class="form-control text-15" id="validationCustom01"
+                                           value="{{ campaign.name }}"
+                                           placeholder="Campaign Name" name="name" disabled>
+                                    <div class="invalid-feedback" id="mess1">
+                                        Campaign name cannot be empty!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-18" for="validationCustom02"
+                                           style="width: auto">Description</label>
+                                    <input disabled type="text" class="form-control text-15" id="validationCustom02"
+                                           value="{{ campaign.description }}"
+                                           placeholder="Enter your campaign description" name="description"
+                                           required>
+                                    <div class="invalid-feedback" id="mess2">
+                                        Campaign description cannot be empty!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-18" for="validationCustom03">Current account balance</label>
+                                    <input type="number" value="{{ profile.current_account_balance }}"
+                                           class="form-control text-15" id="current_acb"
+                                           placeholder="currentButget" name="currentButget" required disabled
+                                           value="$ 100.000">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-18" for="validationCustom03">Campaign Budget</label>
+                                    <input type="number" value="{{ campaign.budget }}" class="form-control text-15"
+                                           id="cp_budget"
+                                           placeholder="Budget for your campaign." name="budget" disabled>
+                                    <div class="invalid-feedback" id="mess3">
+                                        Campaign budget cannot be negative, empty or exceed current account balance!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mb-4">
+                                <div class="col-md-3 mb-3 date-in-form">
+                                    <label for="picker2" class="texttitle text-18">Start date</label>
+                                    <input disabled type="date" value="{{ start_date }}" id="startdate_picker"
+                                           class="form-control datepicker text-15"
+                                           placeholder="yyyy-mm-dd" name="str_date_1" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="picker2" class="texttitle text-18">End date</label>
+                                    <input disabled type="date" value="{{ end_date }}" id="enddate_picker"
+                                           class="form-control datepicker text-15"
+                                           placeholder="yyyy-mm-dd" name="end_date_1" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-18" for="validationCustom04" style="width: auto">Destination
+                                        Url</label>
+                                    <!-- <input type="url" value="{{ campaign.destination_url }}" class="form-control text-15" placeholder="User will be redirect to this url when they click your Ad." aria-describedby="inputGroupPrepend" name="destination_url" required>
+                                        <div class="invalid-feedback" id="mess4">
+                                            Please enter a valid url.
+                                        </div> -->
+                                    <a href="{{ campaign.destination_url }}" target="_blank"
+                                       class="form-control text-15">{{ campaign.destination_url }}</a>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <b class="text-30">Target Objects</b>
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="card-title"><b>City</b></div>
+                                            {% for city in campaign_target_city %}
+                                                <label class="checkbox checkbox-success mb-4">
+                                                    <input type="checkbox" name="target_city" value="{{ city.id }}"
+                                                           checked disabled>
+                                                    <span class="text-18">{{ city.name }}</span>
+                                                    <span class="checkmark"></span>
+                                                </label> {% endfor %} {% for city in target_city %}
+                                            <label class="checkbox checkbox-success mb-4">
+                                                <input type="checkbox" name="target_city" value="{{ city.id }}"
+                                                       disabled>
+                                                <span class="text-18">{{ city.name }}</span>
+                                                <span class="checkmark"></span>
+                                            </label> {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="card-title"><b>OS</b></div>
+                                            {% for os in campaign_target_os %}
+                                                <label class="checkbox checkbox-success mb-4">
+                                                    <input type="checkbox" name="target_os" value="{{ os.id }}" checked
+                                                           disabled>
+                                                    <span class="text-18">{{ os.name }}</span>
+                                                    <span class="checkmark"></span>
+                                                </label> {% endfor %} {% for os in target_os %}
+                                            <label class="checkbox checkbox-success mb-4">
+                                                <input type="checkbox" name="target_os" value="{{ os.id }}" disabled>
+                                                <span class="text-18">{{ os.name }}</span>
+                                                <span class="checkmark"></span>
+                                            </label> {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="card-title"><b>Browser</b></div>
+                                            {% for browser in campaign_target_browser %}
+                                                <label class="checkbox checkbox-success mb-4">
+                                                    <input type="checkbox" name="target_browser"
+                                                           value="{{ browser.id }}" checked disabled>
+                                                    <span class="text-18">{{ browser.name }}</span>
+                                                    <span class="checkmark"></span>
+                                                </label> {% endfor %} {% for browser in target_browser %}
+                                            <label class="checkbox checkbox-success mb-4">
+                                                <input type="checkbox" name="target_browser"
+                                                       value="{{ browser.id }}" disabled>
+                                                <span class="text-18">{{ browser.name }}</span>
+                                                <span class="checkmark"></span>
+                                            </label> {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <b class="text-30">Ad List</b>
+                            <div class="mt-5 mb-2">
+                                <label class="switch pr-5 switch-primary mr-3">
+                                    <input type="checkbox" onclick="showTable()">
+                                    <span class="slider"></span>
+                                    <span class="text-23"><b>&nbsp; Show / Hide Image</b></span>
+                                </label>
+                            </div>
+                            <div class="mcardtable table-responsive">
+                                <div style="font-size: medium" id="hiddenTables">
+                                    {# List Ad in Campaign #}
+                                    <table id="zero_configuration_table"
+                                           class="display table table-striped table-bordered">
+                                        <thead>
+                                        <tr class="fixed_Headertable">
+                                            <th>#</th>
+                                            <th>Ad Name</th>
+                                            <th>Date Created</th>
+                                            <th>Size</th>
+                                            <th>Banner Image</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for ad in ad_in_campaign %}
+                                            <tr>
+                                                <td>
+                                                    <label class="checkbox checkbox-outline-primary">
+                                                        <input name="ad_checked_list" type="checkbox"
+                                                               value="{{ ad.id }}" checked disabled/>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <td> {{ ad.name }}</td>
+                                                <td>{{ ad.date_created }}</td>
+                                                <td> {{ ad.size }}</td>
+                                                <td>
+                                                    <div style="background-color: gray; width: {{ ad.ad_width }}px; height: {{ ad.ad_height }}px;">
+                                                        <div style="width: 100%;height: 100%;overflow: hidden;">
+                                                            <img src="{{ ad.url }}">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %} {% for ad in ad_not_in_campaign %}
+                                            <tr>
+                                                <td>
+                                                    <label class="checkbox checkbox-outline-primary">
+                                                        <input name="ad_checked_list" type="checkbox"
+                                                               value="{{ ad.id }}" disabled/>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <td> {{ ad.name }}</td>
+                                                <td>{{ ad.date_created }}</td>
+                                                <td> {{ ad.size }}</td>
+                                                <td>
+                                                    <div style="background-color: gray; width: {{ ad.ad_width }}px; height: {{ ad.ad_height }}px;">
+                                                        <div style="width: 100%;height: 100%;overflow: hidden;">
+                                                            <img src="{{ ad.url }}">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        <th>#</th>
+                                        <th>Ad Name</th>
+                                        <th>Date Created</th>
+                                        <th>Size</th>
+                                        <th>Banner Image</th>
+                                        </tfoot>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============ Body content End ============= -->
+<!-- ============ Search UI Start ============= -->
+<!-- <div class="search-ui">
+        <div class="search-header">
+            <img src="{% static 'assets/images/logo.png' %}" alt="" class="logo">
+            <button class="search-close btn btn-icon bg-transparent float-right mt-2">
+                <i class="i-Close-Window text-22 text-muted"></i>
+            </button>
+        </div>
+
+        <input type="text" placeholder="Type here" class="search-input" autofocus>
+
+        <div class="search-title">
+            <span class="text-muted">Search results</span>
+        </div>
+
+        <div class="search-results list-horizontal">
+            <div class="list-item col-md-12 p-0">
+            </div>
+            <div class="list-item col-md-12 p-0">
+            </div>
+            <div class="list-item col-md-12 p-0">
+            </div>
+        </div>
+    </div> -->
+<!-- ============ Search UI End ============= -->
+<script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/script.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/sidebar.large.script.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery-1.11.0.min.js' %}"></script>
+<script src="{% static 'assets/js/message/closeBtn.js' %}"></script>
+<script src="{% static 'assets/js/form.validation.script.js' %}"></script>
+<script src="{% static 'assets/js/vendor/pickadate/picker.js' %}"></script>
+<script src="{% static 'assets/js/vendor/pickadate/picker.date.js' %}"></script>
+
+<script src="{% static 'assets/js/es5/widget-list.min.js' %}"></script>
+
+<script src="{% static 'assets/js/sweetalert.script.js' %}"></script>
+<script src="{% static 'assets/js/vendor/sweetalert2.min.js' %}"></script>
+
+<script src="{% static 'assets/js/datatables.script.js' %}"></script>
+<script src="{% static 'assets/js/vendor/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/myJS/hideTag.js' %}"></script>
+<script>
+    $("#confirm_modal").click(function () {
+        // var ptr =
+        var x = $("#card_number");
+        if (/[0-9]/g.test(x.val())) {
+            console.log("alright")
+        } else {
+            swal({
+                type: 'error',
+                title: 'Something wrong!',
+                text: 'Card number can only contain number and cannot be empty.',
+                confirmButtonText: 'Got it!',
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-lg btn-danger'
+            });
+            return false;
+        }
+    });
+
+    $(".topupbalance_form").submit(function () {
+        event.preventDefault();
+        $('#same_password').css("display", "none");
+        $.post("{% url 'panther_ad:top_up_balance' %}", $(this).serialize(),
+            function (data) {
+                if (data.success == 'T') {
+                    console.log('success');
+
+                    $("#tu_succeeded").css("display", "block");
+                    $("#tu_failed").css("display", "none");
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2500);
+                } else {
+                    console.log('fail');
+                    $("#tu_failed").css("display", "block");
+                    $("#tu_succeeded").css("display", "none");
+                }
+            }
+        );
+
+
+    });
+
+    $("#close_modal").click(function () {
+        $('.topupbalance_form').trigger("reset");
+    });
+    {#
+    $(document).ready(function () {#} {##} {##} {# // on click#}
+        {#
+        $("#cp_budget").attr({
+            #} {#
+            "max": $("#current_acb").val(),;
+        #
+    } {#
+        "min";
+    :
+        0;
+        #
+    };
+    {#})
+    #
+    } {##} {# // start date#}
+    {#
+    var st_date = $("#startdate_picker").pickadate();
+    #
+    } {#
+    var st_date_picker = st_date.pickadate('picker');
+    #
+    } {#
+    st_date_picker.set('min', true);
+    #
+    } {##} {#
+    var en_date = $("#enddate_picker").pickadate();
+    #
+    } {#
+    var en_date_picker = en_date.pickadate('picker');
+    #
+    } {#
+    en_date_picker.set('min', true);
+    #
+    } {# // en_date_picker.set('max', en_date_picker.);#}
+    {#
+    var st_d = new Date($("#startdate_picker").val());
+    #
+    } {#
+    var en_d = new Date($("#enddate_picker").val());
+    #
+    } {##} {# //today#}
+    {#
+    var td_d = new Date();
+    #
+    } {#
+    var st_min_d = new Date(td_d);
+    #
+    } {#
+    st_min_d.setDate(td_d.getDate() + 1);
+    #
+    } {#
+    st_date_picker.set('select', new Date(st_d));
+    #
+    } {#
+    st_date_picker.set('min', new Date(st_min_d));
+    #
+    } {##} {#
+    en_date_picker.set('select', new Date(en_d));
+    #
+    } {# //check select#}
+    {##} {##} {#
+    en_date_picker.on({
+        #} {#
+        close: function () {#} {#
+            var x = new Date(en_date_picker.get());
+            #
+        } {#
+        var y = new Date(x);
+    #
+    } {#
+    y.setDate(x.getDate() - 1);
+    #
+    } {#
+    st_date_picker.set('max', new Date(y));
+    #
+    } {# // st_date_picker.set('disable', [new Date(en_date_picker.get())])#}
+    {
+        #}#
+    }
+    {#})
+    #
+    } {##} {##} {#
+    st_date_picker.on({
+        #} {#
+        close: function () {#} {#
+            var x = new Date(st_date_picker.get());
+            #
+        } {#
+        var y = new Date(x);
+    #
+    } {#
+    y.setDate(x.getDate() + 1);
+    #
+    } {#
+    en_date_picker.set('min', new Date(y));
+    #
+    } {# // en_date_picker.set('disable', [new Date(st_date_picker.get())]);#}
+    {
+        #}#
+    }
+    {#})
+    #
+    } {##} {#
+    $("#create_campaign_button").click(function () {#} {#
+        if (en_date_picker.get() == '' || st_date_picker.get() == '') {#} {#
+            swal({
+                #} {#
+                type: 'error',;
+            #
+        } {#
+            'Create Failed!',
+                #
+        }
+        {#
+        'Please select campaign Start date and End date!',
+            #
+    };
+    {#
+    'Got it!',
+        #
+    } {#
+    false,
+        #
+    } {#
+    'btn btn-lg btn-danger';
+    #
+    }
+    {#})
+    #
+    } {#
+    return false;
+    #
+    }
+    {#} else
+        if ($("#cp_extra_budget").val() == '' || (parseInt($("#cp_extra_budget").val()) > parseInt($("#current_acb").val()))) {#} {#
+            swal({
+                #} {#
+                type: 'error',;
+            #
+        } {#
+            'Error!',
+                #
+        }
+        {#
+        'Extra budget can not be empty or exceed your current account balance',
+            #
+    }
+    {#
+    'Got it!',
+        #
+    } {#
+    false,
+        #
+    } {#
+    'btn btn-lg btn-danger';
+    #
+    }
+    {#})
+    #
+    } {#
+    return false;
+    #
+    } {##}
+    {
+        #}#
+    }
+    {##} {# // parseInt($("#cp_extra_budget")).val() > parseInt($("#current_acb").val())#}
+    {#})
+    #
+    }
+
+    })
+
+</script>
+
+</body>
+
+</html>

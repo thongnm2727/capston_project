@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Panther_Ad</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/styles/css/themes/lite-purple.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/myStyle.css' %}">
+</head>
+
+<body class="text-left">
+<!-- Pre Loader Strat  -->
+<div class='loadscreen' id="preloader">
+
+    <div class="loader spinner-bubble spinner-bubble-primary">
+
+
+    </div>
+</div>
+<!-- Pre Loader end  -->
+
+
+<div class="app-admin-wrap layout-sidebar-large">
+    <div class="main-header">
+        <div class="logo">
+            <a href="{% url 'panther_ad:index' %}">
+                <img src="{% static 'assets/images/logo.png' %}" alt="">
+            </a>
+        </div>
+
+        <div class="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="d-flex align-items-center">
+            <!-- Mega menu -->
+            <div class="dropdown mega-menu d-none d-md-block">
+                <a href="#" class="btn text-muted dropdown-toggle mr-3" id="dropdownMegaMenuButton"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mega Menu</a>
+                <div class="dropdown-menu text-left" aria-labelledby="dropdownMenuButton">
+                    <div class="row m-0">
+                        <div class="col-md-4 p-4 bg-img">
+                            <h2 class="title">Mega Menu <br> Sidebar</h2>
+                        </div>
+                        <div class="col-md-4 p-4">
+                            <div class="menu-icon-grid w-auto p-0">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / Mega menu -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="search-icon text-muted i-Magnifi-Glass1"></i>
+            </div>
+        </div>
+
+        <div style="margin: auto"></div>
+        {#            Create Ads Btn     #}
+
+        {#        Full Screen toggle #}
+        <div class="header-part-right">
+            <!-- Full screen toggle -->
+            <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
+            <!-- Grid menu Dropdown -->
+            <div class="dropdown">
+                <i class="i-Safe-Box text-muted header-icon" role="button" id="dropdownMenuButton"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="menu-icon-grid">
+
+                    </div>
+                </div>
+            </div>
+            <!-- Notificaiton -->
+            <div class="dropdown">
+                <div class="badge-top-container" role="button" id="dropdownNotification" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                    <span class="badge badge-primary">3</span>
+                    <i class="i-Bell text-muted header-icon"></i>
+                </div>
+                <!-- Notification dropdown -->
+                <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none"
+                     aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>New message</span>
+                                <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">10 sec ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Receipt-3 text-success mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>New order received</span>
+                                <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">2 hours ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Empty-Box text-danger mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>Product out of stock</span>
+                                <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">10 hours ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Data-Power text-success mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>Server Up!</span>
+                                <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">14 hours ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">Server rebooted successfully</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Notificaiton End -->
+
+            <!-- User avatar dropdown -->
+            <div class="dropdown">
+                <div class="user col align-self-end">
+                    <img src="{% static 'assets/images/faces/1.jpg' %}" id="userDropdown" alt=""
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div class="dropdown-header">
+                            {% if user %}
+                                <h3><i class="i-Lock-User mr-1"></i> {{ user.username }}</h3>
+                            {% endif %}
+                        </div>
+                        <a class="dropdown-item" href="#"> Add funds</a>
+                        <a class="dropdown-item">Account settings</a>
+                        <a class="dropdown-item">Billing history</a>
+                        <a class="dropdown-item" href="{% url 'panther_ad:signout' %}">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- header top menu end -->
+    <div class="side-content-wrap">
+        <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+            <ul class="navigation-left">
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:index' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:campaigns' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">Campaign</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:ads' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">Ads</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            </ul>
+        </div>
+
+        {#        <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">#}
+        {##}
+        {#            <ul class="childNav" data-parent="report">#}
+        {#                <li class="nav-item">#}
+        {#                    <a href="{% url 'panther_ad:report_ad' %}">#}
+        {#                        <i class="nav-icon i-Clock-3"></i>#}
+        {#                        <span class="item-name">Campain 1</span>#}
+        {#                    </a>#}
+        {#                </li>#}
+        {#                <li class="nav-item">#}
+        {#                    <a href="{% url 'panther_ad:create_ad' %}">#}
+        {#                        <i class="nav-icon i-Clock-3"></i>#}
+        {#                        <span class="item-name">Campain 1</span>#}
+        {#                    </a>#}
+        {#                </li>#}
+        {#            </ul>#}
+        {#        </div>#}
+        {#        <div class="sidebar-overlay"></div>#}
+    </div>
+    <!--=============== Left side End ================-->
+
+    <!-- ============ Body content start ============= -->
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+        <div class="breadcrumb">
+            <h1>Campaign</h1>
+            <ul>
+                <li><a href=""></a></li>
+                <li>Campaign</li>
+            </ul>
+        </div>
+        <div class="separator-breadcrumb border-top"></div>
+        <!--/.header-->
+        <div class="row mb-4">
+            <div class="col-md-7 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <h1>Add Funds to {{ user.username }}'s Wallet</h1>
+                        <p>Funds in your Panther Wallet may be used for the purchase of any campaign on Panther
+                            Adv</p>
+                        <p>You'll have a chance to review your order before it's place</p>
+                        {#                        ================================================================    #}
+
+                        <ul class="nav nav-pills" id="myPillTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-icon-pill" data-toggle="pill"
+                                   href="#directBankTransfer" role="tab" aria-controls="homePIll"
+                                   aria-selected="true"><i class="nav-icon i-Home1 mr-1"></i> Direct Bank
+                                    Transfer</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-icon-pill" data-toggle="pill" href="#creditCard"
+                                   role="tab" aria-controls="contactPIll" aria-selected="false"><i
+                                        class="nav-icon i-Home1 mr-1"></i> Credit Card</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="myPillTabContent">
+                            <div class="tab-pane fade show active" id="directBankTransfer" role="tabpanel"
+                                 aria-labelledby="home-icon-pill">
+                                Direct Bank Transfer
+                                <form method="post" href="#">
+                                    {% csrf_token %}
+                                    <label class="radio radio-outline-primary">
+                                        <input type="radio" name="money" value="50">
+                                        <span>&nbsp;<b>Add $50</b></span>
+                                        <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="radio radio-outline-primary">
+                                        <input type="radio" name="money" value="150">
+                                        <span>&nbsp;<b>Add $150</b></span>
+                                        <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="radio radio-outline-primary">
+                                        <input type="radio" name="money" value="200">
+                                        <span>&nbsp;<b>Add $200</b></span>
+                                        <span class="checkmark text-center"></span>
+                                    </label>
+
+                                    <label class="radio radio-outline-primary">
+                                        <input type="radio" name="money" value="250">
+                                        <span>&nbsp;<b>Add $250</b></span>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <button type="submit" class="btn btn-rounded btn-info btnfloat_right">PLACE
+                                        ORDER
+                                    </button>
+
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade" id="creditCard" role="tabpanel"
+                                 aria-labelledby="contact-icon-pill">
+                                <div class="row">
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label>Card Number</label>
+                                        <input type="text" class="form-control" placeholder="Card Number">
+                                    </div>
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label>Expiration date</label><br>
+                                        <select id="month" class="col-md-3 form-group">
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                        <select id="year" class="col-md-3 form-group">
+                                            <option value="2015">2015</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <input type="text" class="col-md-2 form-control" placeholder="CCV">
+                                    </div>
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label>Add Funds</label>
+                                        <input type="text" class="form-control" placeholder="Enter number">
+                                    </div>
+                                </div>
+
+                                <h4>BILLING INFORMATION</h4>
+                                <div>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="firstName1">First name</label>
+                                                <input type="text" class="form-control" id="firstName1"
+                                                       placeholder="Enter your first name">
+                                            </div>
+
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="lastName1">Last name</label>
+                                                <input type="text" class="form-control" id="lastName1"
+                                                       placeholder="Enter your last name">
+                                            </div>
+
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="exampleInputEmail1">City</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                                       placeholder="City">
+                                                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                            </div>
+
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="phone">Zip or Postal Code</label>
+                                                <input class="form-control" id="phone"
+                                                       placeholder="Zip or Postal Code">
+                                            </div>
+
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="credit1">Billing address</label>
+                                                <input class="form-control" id="credit1"
+                                                       placeholder="Billing address">
+                                            </div>
+
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="website"></label>
+                                                <input class="form-control" id="website"
+                                                       placeholder="Billing address,Line 2">
+                                            </div>
+
+                                            <div class="col-md-6 form-group mb-3">
+                                                <label for="picker1">Country</label>
+                                                <select class="form-control">
+                                                    <option>Country</option>
+                                                    <option>Viet Nam</option>
+                                                    <option>US</option>
+                                                    <option>UK</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary">PLACE ORDER</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        {#                       -------------------------------------    #}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <h1>{{ user.username }}'s Wallet</h1>
+
+                        <h1>$ 100.000</h1>
+                    </div>
+                    <div class="purple-700 mb-4 ml-2 mr-2 pl-2">
+                        <a href="#" class="text-white">See my Accoount Detail</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============ Body content End ============= -->
+<!--=============== End app-admin-wrap ================-->
+
+<!-- ============ Search UI Start ============= -->
+<div class="search-ui">
+    <div class="search-header">
+        <img src="{% static 'assets/images/logo.png' %}" alt="" class="logo">
+        <button class="search-close btn btn-icon bg-transparent float-right mt-2">
+            <i class="i-Close-Window text-22 text-muted"></i>
+        </button>
+    </div>
+
+    <input type="text" placeholder="Type here" class="search-input" autofocus>
+
+    <div class="search-title">
+        <span class="text-muted">Search results</span>
+    </div>
+
+    <div class="search-results list-horizontal">
+        <div class="list-item col-md-12 p-0">
+        </div>
+        <div class="list-item col-md-12 p-0">
+        </div>
+        <div class="list-item col-md-12 p-0">
+        </div>
+    </div>
+    <!-- PAGINATION CONTROL -->
+    <div class="col-md-12 mt-5 text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination d-inline-flex">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- ============ Search UI End ============= -->
+
+<script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/script.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/sidebar.large.script.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery-1.11.0.min.js' %}"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="{% static 'assets/js/jQuery-File-Upload-9.5.7/js/vendor/jquery.ui.widget.js' %}"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="{% static 'assets/js/jQuery-File-Upload-9.5.7/js/jquery.iframe-transport.js' %}"></script>
+<!-- The basic File Upload plugin -->
+<script src="{% static 'assets/js/jQuery-File-Upload-9.5.7/js/jquery.fileupload.js' %}"></script>
+<script src="{% static 'assets/js/imageuploader.js' %}"></script>
+<script src="{% static 'assets/js/myJS/hidenTag.js' %}"></script>
+
+<script src="{% static 'assets/js/myJS/getDatetime.js' %}"></script>
+</body>
+
+</html>

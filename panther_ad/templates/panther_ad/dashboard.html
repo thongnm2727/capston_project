@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/styles/css/themes/lite-purple.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/myCss.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"> -->
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/myStyle.css' %}"> -->
+</head>
+
+<body class="text-left">
+<!-- Pre Loader Strat  -->
+<div class='loadscreen' id="preloader">
+
+    <div class="loader spinner-bubble spinner-bubble-primary">
+
+
+    </div>
+</div>
+<!-- Pre Loader end  -->
+<div class="app-admin-wrap layout-sidebar-large clearfix">
+    <div class="main-header">
+        <div class="logo">
+            <a href="{% url 'panther_ad:index' %}">
+                <img src="{% static 'assets/images/panther_ad.png' %}" alt="">
+            </a>
+        </div>
+
+        <div class="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div style="margin: auto;">
+
+        </div>
+
+        {# Create Ads Btn #} {# Full Screen toggle #}
+        <div class="header-part-right">
+            <!-- Full screen toggle -->
+            <div style="margin-right: 50px;white-space: nowrap;">
+                <a href="#">
+                    <button type="button" class="buttonsz" data-toggle="modal" data-target="#topupbalance"><span><b class="text-20 pb-10">&nbsp;&nbsp;&nbsp;&nbsp;+
+                                    Top up balance</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </a>
+
+            </div>
+            <!-- Top Up Balance Modal content -->
+
+            <div style="margin-right: 50px;white-space: nowrap;">
+                <a href="{% url 'panther_ad:create_ad' %}">
+                    <button type="button" class="buttonsz"><span><b class="text-20 pb-10">&nbsp;&nbsp;&nbsp;&nbsp;+
+                                    Create
+                                    Ad</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </a>
+            </div>
+            <div style="margin-right: 100px;white-space: nowrap;">
+                <a href="{% url 'panther_ad:create_campaign' %}">
+                    <button type="button" class="buttonsz"><span><b class="text-20 pb-10">&nbsp;&nbsp;&nbsp;&nbsp;+
+                                    Create
+                                    Campaign</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </a>
+
+            </div>
+            <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
+            <!-- Grid menu Dropdown -->
+
+
+            <!-- User avatar dropdown -->
+            <div class="dropdown">
+                <div class="user col align-self-end">
+                    <img src="{% static 'assets/images/faces/faceAva.png' %}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="false">
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div class="dropdown-header">
+                            <h3><i class="i-Lock-User mr-1"></i> {{ user.username }}</h3>
+                        </div>
+                        <a class="dropdown-item" href="{% url 'panther_ad:user_profile' %}">User Profile</a>
+                        <a class="dropdown-item" href="{% url 'panther_ad:account_activity' %}">Account activity</a>
+                        <a class="dropdown-item" href="{% url 'panther_ad:signout' %}">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- header top menu end -->
+    <div class="modal fade" id="topupbalance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Top up balance</h2>
+                    <br/>
+
+                </div>
+                <form class="needs-validation topupbalance_form" action="{% url 'panther_ad:top_up_balance' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>Full Name:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-Male-21 text-18"></i>
+                                        </span>
+                                </div>
+                                <input name="full_name" type="text" class="form-control" required/>
+                                <p id="err_contain_number" style="display: none; color: red;">Name cannot contains number!</p>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <!-- <p style=" color: green; visibility: hidden;" class="modal-title" id="succeeded_update"></p> -->
+                            <label>Bank:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-University1 text-18"></i>
+                                        </span>
+                                </div>
+                                <select name="bank" class="form-control">
+                                    <option value="MB"> MB Bank</option>
+                                    <option value="VCB"> Vietcombank</option>
+                                    <option value="TPB"> TPBank</option>
+                                    <option value="VTB"> VietinBank</option>
+                                    <option value="AGB"> Agribank</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-Credit-Card text-18"></i>
+                                        </span>
+                                </div>
+                                <input type="text" class="form-control" id="card_number" required/>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Expire Date:</label>
+
+                            <div class="form-inline">
+                                <select class="form-control" style="width:45%">
+                                    <option>01 - January</option>
+                                    <option>02 - February</option>
+                                    <option>03 - March</option>
+                                    <option>04 - April</option>
+                                    <option>05 - May</option>
+                                    <option>06 - June</option>
+                                    <option>07 - July</option>
+                                    <option>08 - August</option>
+                                    <option>09 - September</option>
+                                    <option>10 - October</option>
+                                    <option>11 - November</option>
+                                    <option>12 - December</option>
+                                </select>
+                                <span class="text-center" style="width:10%">
+                                        /
+                                    </span>
+                                <select class="form-control" style="width:45%">
+                                    <option>2018</option>
+                                    <option>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="i-Dollar text-18"></i>
+                                        </span>
+                                </div>
+                                <input type="text" class="form-control" name="amount" required/>
+                            </div>
+
+                        </div>
+                        <p id="tu_succeeded" style="display: none; color: green;">Top up succeeded! </p>
+                        <p id="tu_failed" style="display: none; color: red;">Top up failed! Something went wrong! </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close_modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                        </button>
+                        <button id="confirm_modal" type="submit" class="btn btn-primary ml-2">Confirm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="side-content-wrap">
+        <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+            <ul class="navigation-left">
+                <li class="nav-item ">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:index' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text"><b class="text-20">Dashboard</b></span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:campaigns' %}">
+                        <i class="nav-icon i-Library"></i>
+                        <span class="nav-text">Campaign</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:ads' %}">
+                        <i class="nav-icon i-Belt-3"></i>
+                        <span class="nav-text">Ads</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:account_activity' %}">
+                        <i class="nav-icon i-Dollar-Sign"></i>
+                        <span class="nav-text">Account Activity</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--=============== Left side End ================-->
+
+    <!-- ============ Body content start ============= -->
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+        <div class="breadcrumb">
+            <h1 class="mr-2">Version 1</h1>
+            <ul>
+                <li><a href="{% url 'panther_ad:index' %}">Dashboard</a></li>
+                <li>Version 1</li>
+            </ul>
+        </div>
+
+        <div class="separator-breadcrumb border-top"></div>
+        {% if campaigns.count == 0 %}
+            <h3>You have no campaigns</h3>
+        {% else %}
+            <div class="col-md-8">
+                <p class="text-30 mb-5"> Select Campaign
+                    <select id="campaign_select" name="campaign_select" class="selector form-control mt-3">
+                        {% for campaign in campaigns %}
+                            {% if forloop.last %}
+                                <option selected="selected" value={{ campaign.id }}>{{ campaign.name }}</option>
+                            {% else %}
+                                <option value={{ campaign.id }}>{{ campaign.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </p>
+            </div>
+            <h3 id="no_statistic_alert" hidden></h3>
+            <div class="row" id="first_row_dashboard">
+                <div class="col-lg-8 col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <div class="campaign-drop-down">
+                                    Money spend
+                                    </select>
+                                </div>
+                                <div class="duration-drop-down">
+
+                                </div>
+                            </div>
+                            <div id="basicLine" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-title">Budget</div>
+                            <div id="basicDoughnut" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="second_row_dashboard">
+                <div class="col-lg-8 col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <div class="campaign-drop-down">
+                                    7 days statistics
+                                </div>
+                                <div class="duration-drop-down">
+
+                                </div>
+                            </div>
+                            <div id="stackedPointerArea" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">City impression rate</div>
+
+
+                            <div class="ul-widget-app__poll-list mb-4">
+                                <h3 class="heading mr-2" id="danang_impression">5600</h3>
+                                <div class="d-flex">
+                                    <span class="text-muted text-12">From Da Nang</span>
+                                    <span class="t-font-boldest ml-auto" id="danang_rate">
+                                        56%
+                                    </span>
+                                </div>
+                                <div class="progress progress--height-2 mb-3">
+                                    <div class="progress-bar bg-primary" role="progressbar" id="danang_progressbar" style="width: 56%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="ul-widget-app__poll-list mb-4">
+                                <h3 class="heading mr-2" id="hochiminh_impression">2100</h3>
+                                <div class="d-flex">
+                                    <span class="text-muted text-12">From Ho Chi Minh</span>
+                                    <span class="t-font-boldest ml-auto" id="hochiminh_rate">
+                                        21%
+                                    </span>
+                                </div>
+                                <div class="progress progress--height-2 mb-3">
+                                    <div class="progress-bar bg-success" role="progressbar" id="hochiminh_progressbar" style="width: 21%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                            <div class="ul-widget-app__poll-list mb-4">
+                                <h3 class="heading mr-2" id="hanoi_impression">1000</h3>
+                                <div class="d-flex">
+                                    <span class="text-muted text-12">From Ha Noi</span>
+                                    <span class="t-font-boldest ml-auto" id="hanoi_rate">
+                                        10%
+                                    </span>
+                                </div>
+                                <div class="progress progress--height-2 mb-3">
+                                    <div class="progress-bar bg-dark" role="progressbar" id="hanoi_progressbar" style="width: 10%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+
+    </div>
+    <!-- ============ Body content End ============= -->
+</div>
+<!--=============== End app-admin-wrap ================-->
+
+<!-- ============ Search UI Start ============= -->
+<div class="search-ui">
+    <div class="search-header o-hidden">
+        <img src="{% static 'assets/images/logo.png' %}" alt="" class="logo float-left">
+        <button class="search-close btn btn-icon bg-transparent float-right mt-2">
+            <i class="i-Close-Window text-22 text-muted"></i>
+        </button>
+    </div>
+
+    <input type="text" placeholder="Type here" class="search-input" autofocus>
+
+    <div class="search-title">
+        <span class="text-muted">Search results</span>
+    </div>
+
+    <div class="search-results list-horizontal">
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-1.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-danger">Sale</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-2.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-primary">New</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-3.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-primary">New</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-4.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-primary">New</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PAGINATION CONTROL -->
+    <div class="col-md-12 mt-5 text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination d-inline-flex">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- ============ Search UI End ============= -->
+
+<script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/echarts.min.js' %}"></script>
+<script src="{% static 'assets/js/myJS/dashboard.js' %}"></script>
+
+<script src="{% static 'assets/js/es5/script.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/sidebar.large.script.min.js' %}"></script>
+<script>
+    $("#confirm_modal").click(function () {
+        // var ptr =
+        var x = $("#card_number");
+        if (/[0-9]/g.test(x.val())) {
+            console.log("alright")
+        } else {
+            swal({
+                type: 'error',
+                title: 'Something wrong!',
+                text: 'Card number can only contain number and cannot be empty.',
+                confirmButtonText: 'Got it!',
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-lg btn-danger'
+            });
+            return false;
+        }
+    });
+
+    $(".topupbalance_form").submit(function () {
+        event.preventDefault();
+        $('#same_password').css("display", "none");
+        $.post("{% url 'panther_ad:top_up_balance' %}", $(this).serialize(),
+            function (data) {
+                if (data.success == 'T') {
+                    console.log('success');
+
+                    $("#tu_succeeded").css("display", "block");
+                    $("#tu_failed").css("display", "none");
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2500);
+                } else {
+                    console.log('fail');
+                    $("#tu_failed").css("display", "block");
+                    $("#tu_succeeded").css("display", "none");
+                }
+            }
+        );
+
+
+    });
+
+    $("#close_modal").click(function () {
+        $('.topupbalance_form').trigger("reset");
+    })
+</script>
+</body>
+
+</html>

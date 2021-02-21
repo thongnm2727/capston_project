@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Panther_Ad</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/styles/css/themes/lite-purple.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/myStyle.css' %}">
+</head>
+
+<body class="text-left">
+<div class="auth-layout-wrap" style="background-image: url({% static 'assets/images/photo-wide-4.jpg' %})">
+    <div class="auth-content">
+        <div class="card o-hidden">
+            <div class="row">
+                <div class="col-md-6 text-center "
+                     style="background-size: cover;background-image: url({% static 'assets/images/photo-long-3.jpg' %})">
+                    <div class="pl-3 auth-right">
+                        <div class="auth-logo text-center mt-4">
+                            <img src="{% static 'assets/images/panther_ad.png' %}" alt="">
+                        </div>
+                        <div class="flex-grow-1"></div>
+                        <div class="w-100 mb-4">
+                            <a class="btn btn-primary btn-block btn-rounded mt-3"
+                               href="{% url 'panther_ad:signin' %}">
+                                <i class="i-Mail-with-At-Sign"></i> Sign in!!
+                            </a>
+
+                        </div>
+                        <div class="flex-grow-1"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-4">
+
+                        <h1 class="mb-3 text-18">Sign Up</h1>
+                        {{ message }}
+                        <form action="{% url 'panther_ad:signup' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input id="username" name="username" class="form-control form-control-rounded"
+                                       type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input id="email" name="email" class="form-control form-control-rounded" type="email"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" class="form-control form-control-rounded"
+                                       type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="repassword">Reenter password</label>
+                                <input id="repassword" name="repassword" class="form-control form-control-rounded"
+                                       type="password" required>
+                            </div>
+                            <button class="btn btn-outline-primary btn-block btn-icon-text btn-rounded" type="submit">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/script.min.js' %}"></script>
+</body>
+
+</html>

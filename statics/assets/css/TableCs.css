@@ -1,0 +1,87 @@
+
+tbody td.subTable, thead th.subTable {
+    width: 22%;
+    float: left;
+}
+
+tbody td.center, thead th.center {
+    width: 17%;
+    float: left;
+}
+
+tbody td.fix, thead th.fix {
+    width: 12.5%;
+    float: left;
+    text-align: center;
+}
+
+tbody.fix td, thead.fix th {
+    width: 12.5%;
+    text-align: center;
+}
+
+tbody td.resizeT, thead th.resizeT {
+    width: 12%;
+    text-align: center;
+}
+
+tbody td.resizeTsub, thead th.resizeTsub {
+    width: 12%;
+    text-align: center;
+}
+
+tbody td:last-child, thead th:last-child {
+    border-right: none;
+}
+
+.hide {
+    display: none;
+}
+
+th {
+    /*background-color: #E1DCFF;*/
+}
+
+thead, tbody, tr, td, th {
+    display: block;
+    text-align: center;
+}
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: auto;
+    line-height: 40px;
+    text-align: left;
+}
+
+tbody {
+    height: auto;
+    overflow-y: auto;
+}
+
+
+td a.mylink {
+    text-decoration: none;
+    color: black;
+}
+
+td a:hover.mylink {
+    color: #EB4D8A;
+    text-decoration: underline;
+}
+
+tr th.center {
+    text-align: center;
+
+}
+
+tr td.center {
+    text-align: center;
+
+}

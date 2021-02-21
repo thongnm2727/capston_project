@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Panther_Ad</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/styles/css/themes/lite-purple.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/datatables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/styles/vendor/sweetalert2.min.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'assets/css/myStyle.css' %}">#}
+</head>
+
+<body class="text-left">
+<!-- Pre Loader Strat  -->
+{#<div class='loadscreen' id="preloader">#}
+{##}
+{#    <div class="loader spinner-bubble spinner-bubble-primary">#}
+{##}
+{##}
+{#    </div>#}
+{#</div>#}
+<!-- Pre Loader end  -->
+<div class="app-admin-wrap layout-sidebar-large clearfix">
+    <div class="main-header">
+        <div class="logo">
+            <a href="{% url 'panther_ad:index' %}">
+                <img src="{% static 'assets/images/logo.png' %}" alt="">
+            </a>
+        </div>
+
+        <div class="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="d-flex align-items-center">
+            <!-- Mega menu -->
+            <div class="dropdown mega-menu d-none d-md-block">
+                <a href="#" class="btn text-muted dropdown-toggle mr-3" id="dropdownMegaMenuButton"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mega Menu</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="row m-0">
+                        <div class="col-md-4 p-4 text-left bg-img">
+                            <h2 class="title">Mega Menu <br> Sidebar</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores natus laboriosam
+                                fugit, consequatur.
+                            </p>
+                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem
+                                odio amet eos dolore suscipit placeat.</p>
+                            <button class="btn btn-lg btn-rounded btn-outline-warning">Learn More</button>
+                        </div>
+                        <div class="col-md-4 p-4 text-left">
+                            <p class="text-primary text--cap border-bottom-primary d-inline-block">Features</p>
+                            <div class="menu-icon-grid w-auto p-0">
+                                <a href="#"><i class="i-Shop-4"></i> Home</a>
+                                <a href="#"><i class="i-Library"></i> UI Kits</a>
+                                <a href="#"><i class="i-Drop"></i> Apps</a>
+                                <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
+                                <a href="#"><i class="i-Checked-User"></i> Sessions</a>
+                                <a href="#"><i class="i-Ambulance"></i> Support</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 p-4 text-left">
+                            <p class="text-primary text--cap border-bottom-primary d-inline-block">Components</p>
+                            <ul class="links">
+                                <li><a href="../../../templates/common/accordion.html">Accordion</a></li>
+                                <li><a href="../../../templates/common/alerts.html">Alerts</a></li>
+                                <li><a href="../../../templates/common/buttons.html">Buttons</a></li>
+                                <li><a href="../../../templates/common/badges.html">Badges</a></li>
+                                <li><a href="../../../templates/common/carousel.html">Carousels</a></li>
+                                <li><a href="../../../templates/common/lists.html">Lists</a></li>
+                                <li><a href="../../../templates/common/popover.html">Popover</a></li>
+                                <li><a href="../../../templates/common/tables.html">Tables</a></li>
+                                <li><a href="../../../templates/common/datatables.html">Datatables</a></li>
+                                <li><a href="../../../templates/common/modals.html">Modals</a></li>
+                                <li><a href="../../../templates/common/nouislider.html">Sliders</a></li>
+                                <li><a href="../../../templates/common/tabs.html">Tabs</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / Mega menu -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="search-icon text-muted i-Magnifi-Glass1"></i>
+            </div>
+        </div>
+
+        <div style="margin: auto"></div>
+
+        <div class="header-part-right">
+            <!-- Full screen toggle -->
+            <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
+            <!-- Grid menu Dropdown -->
+            <div class="dropdown">
+                <i class="i-Safe-Box text-muted header-icon" id="dropdownMenuButton" data-toggle="dropdown"
+                   aria-haspopup="true" role="button" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="menu-icon-grid">
+                        <a href="#"><i class="i-Shop-4"></i> Home</a>
+                        <a href="#"><i class="i-Library"></i> UI Kits</a>
+                        <a href="#"><i class="i-Drop"></i> Apps</a>
+                        <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
+                        <a href="#"><i class="i-Checked-User"></i> Sessions</a>
+                        <a href="#"><i class="i-Ambulance"></i> Support</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Notificaiton -->
+            <div class="dropdown">
+                <div class="badge-top-container" id="dropdownNotification" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                    <span class="badge badge-primary">3</span>
+                    <i class="i-Bell text-muted header-icon"></i>
+                </div>
+                <!-- Notification dropdown -->
+                <div class="dropdown-menu rtl-ps-none dropdown-menu-right notification-dropdown"
+                     aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>New message</span>
+                                <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">10 sec ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Receipt-3 text-success mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>New order received</span>
+                                <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">2 hours ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Empty-Box text-danger mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>Product out of stock</span>
+                                <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">10 hours ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-item d-flex">
+                        <div class="notification-icon">
+                            <i class="i-Data-Power text-success mr-1"></i>
+                        </div>
+                        <div class="notification-details flex-grow-1">
+                            <p class="m-0 d-flex align-items-center">
+                                <span>Server Up!</span>
+                                <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
+                                <span class="flex-grow-1"></span>
+                                <span class="text-small text-muted ml-auto">14 hours ago</span>
+                            </p>
+                            <p class="text-small text-muted m-0">Server rebooted successfully</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Notificaiton End -->
+
+            <!-- User avatar dropdown -->
+            <div class="dropdown">
+                <div class="user col align-self-end">
+                    <img src="{% static 'assets/images/faces/faceAva.png' %}" id="userDropdown" alt=""
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div class="dropdown-header">
+                            {% if user %}
+                                <i class="i-Lock-User mr-1"></i> {{ user.username }}
+                            {% endif %}
+                        </div>
+                        <a class="dropdown-item" href="{% url 'panther_ad:user_profile' %}">Account settings</a>
+                        <a class="dropdown-item">Billing history</a>
+                        <a class="dropdown-item" href="{% url 'panther_ad:signout' %}">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- header top menu end -->
+
+    <div class="side-content-wrap">
+        <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+            <ul class="navigation-left">
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:index' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">Campaign Approvement</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:campaigns' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">Income Management</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{% url 'panther_ad:campaigns' %}">
+                        <i class="nav-icon i-Bar-Chart"></i>
+                        <span class="nav-text">User Management</span>
+                    </a>
+                    <div class="triangle"></div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!--=============== Left side End ================-->
+
+    <!-- ============ Body content start ============= -->
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+        <div class="breadcrumb">
+            <h1 class="mr-2">Version 1</h1>
+            <ul>
+                <li><a href="{% url 'panther_ad:index' %}">Campaign Approvement</a></li>
+                <li>Version 1</li>
+            </ul>
+        </div>
+
+        <div class="separator-breadcrumb border-top"></div>
+        <div class="row mb-4">
+            <div class="col-md-12 mb-4">
+                <div class="card text-left">
+                    {% csrf_token %}
+                    {% if success_message %}<p><strong>{{ success_message }}</strong></p>{% endif %}
+                    <div class="card-body">
+                        <div class="ul-widget__head v-margin">
+                            <div class="ul-widget__head-label">
+                                <h4 class="ul-widget__head-title">User Management</h4>
+                            </div>
+                            <button type="button" class="btn bg-white _r_btn border-0" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                <span class="_dot _inline-dot bg-primary"></span>
+                                <span class="_dot _inline-dot bg-primary"></span>
+                                <span class="_dot _inline-dot bg-primary"></span>
+                            </button>
+
+                            <div class="dropdown-menu" x-placement="bottom-start"
+                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(964px, 142px, 0px);">
+                                <a class="dropdown-item ul-widget__link--font" href="#">
+                                    <i class="i-Bar-Chart-4"> </i>
+                                    Export</a>
+                            </div>
+                        </div>
+                        <p></p>
+                        <div class="table-responsive">
+                            <div id="zero_configuration_table_wrapper"
+                                 class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length" id="zero_configuration_table_length"><label>Show
+                                            <select name="zero_configuration_table_length"
+                                                    aria-controls="zero_configuration_table"
+                                                    class="form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="zero_configuration_table_filter" class="dataTables_filter"><label>Search:<input
+                                                type="search" class="form-control form-control-sm" placeholder=""
+                                                aria-controls="zero_configuration_table"></label></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="zero_configuration_table"
+                                               class="display table table-striped table-bordered dataTable"
+                                               style="width:100%" role="grid"
+                                               aria-describedby="zero_configuration_table_info">
+                                            <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="zero_configuration_table" aria-sort="ascending">
+                                                    #
+                                                </th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">ID</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Fist Name</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Last Name</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Email</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Role</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Last Login</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Gender</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">DoB</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Address</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Phone</th>
+                                                <th class="sorting" aria-controls="zero_configuration_table" aria-sort="ascending">Account Balance
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">1</td>
+                                                <td>1</td>
+                                                <td>Tiger</td>
+                                                <td> Nixon</td>
+                                                <td>TigerNixon@gmail.com</td>
+                                                <td>User</td>
+                                                <td>2011/04/25</td>
+                                                <td>Male</td>
+                                                <td>1911/04/25</td>
+                                                <td>New York</td>
+                                                <td>2011042512</td>
+                                                <td>$320,800</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">2</td>
+                                                <td>2</td>
+                                                <td>Garrett</td>
+                                                <td> Winters</td>
+                                                <td>GarrettWinters@gmail.com</td>
+                                                <td>User</td>
+                                                <td>2011/07/25</td>
+                                                <td>Male</td>
+                                                <td>1968/07/25</td>
+                                                <td>Tokyo</td>
+                                                <td>0355436854</td>
+                                                <td>$170,750</td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">3</td>
+                                                <td>3</td>
+                                                <td>Ashton</td>
+                                                <td>Cox</td>
+                                                <td>AshtonCox@gmail.com</td>
+                                                <td>Admin</td>
+                                                <td>2009/01/12</td>
+                                                <td>Female</td>
+                                                <td>1989/01/12</td>
+                                                <td>San Francisco</td>
+                                                <td>0358747390</td>
+                                                <td>$86,000</td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ID</th>
+                                                <th>Fist Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Last Login</th>
+                                                <th>Gender</th>
+                                                <th>DoB</th>
+                                                <th>Address</th>
+                                                <th>Phone</th>
+                                                <th>Account Balance</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="zero_configuration_table_info" role="status"
+                                             aria-live="polite">Showing 1 to 10 of 57 entries
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers"
+                                             id="zero_configuration_table_paginate">
+                                            <ul class="pagination">
+                                                <li class="paginate_button page-item previous disabled"
+                                                    id="zero_configuration_table_previous"><a href="#"
+                                                                                              aria-controls="zero_configuration_table"
+                                                                                              data-dt-idx="0"
+                                                                                              tabindex="0"
+                                                                                              class="page-link">Previous</a>
+                                                </li>
+                                                <li class="paginate_button page-item active"><a href="#"
+                                                                                                aria-controls="zero_configuration_table"
+                                                                                                data-dt-idx="1"
+                                                                                                tabindex="0"
+                                                                                                class="page-link">1</a>
+                                                </li>
+                                                <li class="paginate_button page-item "><a href="#"
+                                                                                          aria-controls="zero_configuration_table"
+                                                                                          data-dt-idx="2" tabindex="0"
+                                                                                          class="page-link">2</a></li>
+                                                <li class="paginate_button page-item "><a href="#"
+                                                                                          aria-controls="zero_configuration_table"
+                                                                                          data-dt-idx="3" tabindex="0"
+                                                                                          class="page-link">3</a></li>
+                                                <li class="paginate_button page-item "><a href="#"
+                                                                                          aria-controls="zero_configuration_table"
+                                                                                          data-dt-idx="4" tabindex="0"
+                                                                                          class="page-link">4</a></li>
+                                                <li class="paginate_button page-item "><a href="#"
+                                                                                          aria-controls="zero_configuration_table"
+                                                                                          data-dt-idx="5" tabindex="0"
+                                                                                          class="page-link">5</a></li>
+                                                <li class="paginate_button page-item "><a href="#"
+                                                                                          aria-controls="zero_configuration_table"
+                                                                                          data-dt-idx="6" tabindex="0"
+                                                                                          class="page-link">6</a></li>
+                                                <li class="paginate_button page-item next"
+                                                    id="zero_configuration_table_next"><a href="#"
+                                                                                          aria-controls="zero_configuration_table"
+                                                                                          data-dt-idx="7" tabindex="0"
+                                                                                          class="page-link">Next</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of col -->
+        </div>
+    </div>
+</div>
+<!-- fotter end -->
+<!-- ============ Search UI Start ============= -->
+<div class="search-ui">
+    <div class="search-header o-hidden">
+        <img src="{% static 'assets/images/logo.png' %}" alt="" class="logo float-left">
+        <button class="search-close btn btn-icon bg-transparent float-right mt-2">
+            <i class="i-Close-Window text-22 text-muted"></i>
+        </button>
+    </div>
+
+    <input type="text" placeholder="Type here" class="search-input" autofocus>
+
+    <div class="search-title">
+        <span class="text-muted">Search results</span>
+    </div>
+
+    <div class="search-results list-horizontal">
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-1.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div
+                            class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-danger">Sale</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-2.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div
+                            class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-primary">New</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-3.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div
+                            class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-primary">New</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list-item col-md-12 p-0">
+            <div class="card o-hidden flex-row mb-4 d-flex">
+                <div class="list-thumb d-flex">
+                    <!-- TUMBNAIL -->
+                    <img src="{% static 'assets/images/products/headphone-4.jpg' %}" alt="">
+                </div>
+                <div class="flex-grow-1 pl-2 d-flex">
+                    <div
+                            class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
+                        <!-- OTHER DATA -->
+                        <a href="" class="w-40 w-sm-100">
+                            <div class="item-title">Headphone 1</div>
+                        </a>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">Gadget</p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100">
+                            $300
+                            <del class="text-secondary">$400</del>
+                        </p>
+                        <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
+                            <span class="badge badge-primary">New</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PAGINATION CONTROL -->
+    <div class="col-md-12 mt-5 text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination d-inline-flex">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- ============ Search UI End ============= -->
+
+<script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/echarts.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/echart.options.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/dashboard.v1.script.min.js' %}"></script>
+<script src="{% static 'assets/js/sweetalert.script.js' %}"></script>
+<script src="{% static 'assets/js/es5/script.min.js' %}"></script>
+<script src="{% static 'assets/js/es5/sidebar.large.script.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor/sweetalert2.min.js' %}"></script>
+<script src="{% static 'assets/js/datatables.script.js' %}"></script>
+</body>
+
+</html>
